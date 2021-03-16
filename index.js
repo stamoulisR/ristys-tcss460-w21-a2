@@ -19,16 +19,54 @@ let middleware = require('./middleware')
  */
 app.use(require("body-parser").json())
 
+const isProvided = require('./utilities/exports').helpers.isProvided
+
 /*
  * This middleware function will respond to improperly formed JSON in found in 
  * an HTTP Request BODY.
  */
 app.use(middleware.jsonError)
 
+app.use('/auth', require('./routes/register.js'))
+
 /*
  * A simple Node.js endpoint that responds with HTML.
  */
-app.use('/node', require('./routes/hello.js'))
+
+
+app.use('/demosql', require('./routes/sqlController'))
+
+
+app.get("/params", (request, response) => {
+    //Note the use of request.query -> a GET request sends arguments in the URL
+    if (isProvided(request.query.name)) {
+        response.send({
+            //req.query is a reference to arguments in the POST body
+            message: "Hello, " + request.query.name + "! You sent a GET Request"
+        })
+    } else {
+        response.status(400)
+        response.send({
+            message: "Missing required information"
+        })
+    }
+})
+
+app.post("/params", (request, response) => {
+    //Note the use of request.body -> a POST request sends arguments in the HTTP body
+    if (isProvided(request.body.name)) {
+        response.send({
+            //req.body is a reference to arguments in the POST body
+            message: "Hello, " + request.body.name + "! You sent a POST Request"
+        })
+    } else {
+        response.status(400)
+        response.send({
+            message: "Missing required information"
+        })
+    }
+})
+
 
 /*
  * When clients connect to the base URL, hosts html and other static files found 

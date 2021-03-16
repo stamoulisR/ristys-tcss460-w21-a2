@@ -4,6 +4,9 @@ let pool = require('./sql_conn.js')
 //We use this create the SHA256 hash
 const crypto = require("crypto");
 
+//Used to ensure parameters are passed
+const helpers = require('./utils.js')
+
 function sendEmail(from, receiver, subj, message) {
   //research nodemailer for sending email from node.
   // https://nodemailer.com/about/
@@ -27,5 +30,5 @@ function getHash(pw, salt) {
 }
 
 module.exports = { 
-    pool, getHash, sendEmail
+    pool, getHash, sendEmail, helpers
 }

@@ -1,0 +1,266 @@
+<!DOCTYPE html> 
+<html>
+
+  <head>
+    <title>Moosey's Pizzaria - Order</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Personal stylsheet -->
+    <link rel="stylesheet" href="styles/site.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+
+    <script type="text/JavaScript">
+      (function() {
+    $('form > input').keyup(function() {
+
+        var empty = false;
+        $('form > input').each(function() {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('#subbutt').attr('disabled', 'disabled');
+        } else {
+            $('#subbutt').removeAttr('disabled');
+        }
+    });
+})()
+    </script>
+
+  </head>
+
+  <body>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <a class="navbar-brand" href="/index.html">Moosey's</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/index.html">Home</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/menu.html">Menu</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="/#">Order</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/cart.html">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="login" href="/signin.html">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="register" href="/register.html">Register</a>
+        </li>
+      </ul>
+    </nav>
+
+    <br>
+
+    <!-- welcome banner -->
+    <div class="container-fluid pt-3 my-3 bg-dark text-white">
+      <h1>Order</h1>
+      <p>Alright ya anima, pick which pizza pie you want Lorem ipsum dolor, sit amet 
+      consectetur adipisicing elit. Velit delectus illum quod dignissimos at quae 
+      voluptas laborum perspiciatis tempore amet, placeat esse asperiores ullam molestias 
+      eius fuga earum odit quis.</p>
+    </div>
+
+
+    <!-- The progress bar is seemingly more trouble than it's worth
+    <div class="container p-3 my-3 bg-dark text-white">
+      <h4>Order Progress:</h4>
+      <br>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" id="bar" style="width:0%"></div>
+      </div>
+    </div>
+    -->
+    
+    <form>
+    <!-- Card Columns holding options and running total -->
+    <div class = "container-fluid">
+      <div class="card-columns">
+        <div class="card" style="width:500px; background-color: #31373e;">
+          <div class="card-body">
+            <h4 class="card-title">Sizes:</h4>
+            <form>
+              <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="customRadioSizeSmall" name="radioSize" value="customEx">
+                <label class="custom-control-label" for="customRadioSizeSmall">Small</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="customRadioSizeMed" name="radioSize" value="customEx">
+                <label class="custom-control-label" for="customRadioSizeMed">Medium</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" id="customRadioSizeLarge" name="radioSize" value="customEx">
+                <label class="custom-control-label" for="customRadioSizeLarge">Large</label>
+              </div>
+            </form> 
+          </div>
+        </div>
+
+        <div class="card" style="width:500px; background-color: #31373e;">
+          <h4 class="card-title">Crusts:</h4>
+          <form>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="customRadioCrustThin" name="radioCrust" value="customEx">
+              <label class="custom-control-label" for="customRadioCrustThin">Thin</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="customRadioCrustOg" name="radioCrust" value="customEx">
+              <label class="custom-control-label" for="customRadioCrustOg">Original</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="customRadioCrustStuffed" name="radioCrust" value="customEx">
+              <label class="custom-control-label" for="customRadioCrustStuffed">Stuffed</label>
+            </div>
+          </form> 
+        </div>
+        <div class="card" style="width:500px; background-color: #31373e;">
+          <h4 class="card-title">Cheese & Sauces</h4>
+          <form>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="customRadioSauceRed" name="radioSauce" value="customEx">
+              <label class="custom-control-label" for="customRadioSauceRed">Red Sauce</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="customRadioSauceWhite" name="radioSauce" value="customEx">
+              <label class="custom-control-label" for="customRadioSauceWhite">White Sauce</label>
+            </div>
+          </form>
+          <hr>
+          <form>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="customRadioCheeseOg" name="radioCheese" value="customEx">
+              <label class="custom-control-label" for="customRadioCheeseOg">Original</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input" id="customRadioCheeseVegan" name="radioCheese" value="customEx">
+              <label class="custom-control-label" for="customRadioCheeseVegan">Vegan Cheese</label>
+            </div>
+          </form> 
+        </div>
+        <div class="card" style="width:500px; background-color: #31373e;">
+          <h4 class="card-title">Toppings:</h4>
+          <div class="checkboxform">
+          <form>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="pepperoni" class="custom-control-input" id="customCheckTopping1" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping1">pepperoni</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="sausage" class="custom-control-input" id="customCheckTopping2" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping2">sausage</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="bacon" class="custom-control-input" id="customCheckTopping3" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping3">bacon</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="mushrooms" class="custom-control-input" id="customCheckTopping4" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping4">mushrooms</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="jalepeno" class="custom-control-input" id="customCheckTopping5" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping5">jalapeno</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="bannana" class="custom-control-input" id="customCheckTopping6" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping6">banana peppers</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="olives" class="custom-control-input" id="customCheckTopping7" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping7">olives</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" value="anchovies" class="custom-control-input" id="customCheckTopping8" name="checkToppings">
+              <label class="custom-control-label" for="customCheckTopping8">anchovies</label>
+            </div>
+          </form>
+          </div>
+        </div>
+
+
+      </div>
+
+      <form>
+        <label for="name">Give a name for your order:</label>
+        <input type="text" class="form-control" id="name">
+      </form>
+
+      <div class="btn-group">
+
+      <!-- Button to Open the Modal -->
+      <button type="button" class="btn btn-dark" id="subbutt" data-toggle="modal" data-target="#myModal" disabled>
+        Add to Cart
+      </button>
+    </form>
+
+      <button type="button" class="btn btn-danger" id="reset">Reset</button>
+
+      </div>
+
+  
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+  
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Thank you for your order!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+  
+              <!-- Modal body -->
+              <div class="modal-body">
+                Head over to your cart to check out!
+              </div>
+  
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+    </div>
+
+
+
+    <div class = "container-fluid">
+      <div class="card">
+        <div class="card-header" style="color: white; background-color: #31373e;">Total:</div>
+        <div class="card-body" id="total" style="color: white; background-color: grey;"><p id="total"></p></div>
+        <div class="card-footer" style="color: white; background-color: #31373e;">
+
+          <div class="img-fluid rounded">
+            <!--<img src="images/crust.png" style="display: block;margin-left: auto;margin-right: auto;" alt="2">-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Javascript -->
+    <script src="scripts/js/mainjs.js"></script>
+
+  </body>
+
+</html>

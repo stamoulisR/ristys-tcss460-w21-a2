@@ -1,16 +1,15 @@
 //express is the framework we're going to use to handle requests
 const express = require('express')
 
+const { pool, isProvided } = require('../utilities')
+
 const router = express.Router()
- 
-const pool = require('../utilities/exports').pool
 
-const isProvided = require('../utilities/exports').helpers.isProvided
 
-/**
+/** 
  * @apiDefine JSONError
  * @apiError (400: JSON Error) {String} message "malformed JSON in parameters"
- */ 
+ */
 
 /**
  * @api {post} /demosql Request to add someone's name to the DB
@@ -43,7 +42,7 @@ const isProvided = require('../utilities/exports').helpers.isProvided
  * @apiError (400: SQL Error) {String} message the reported SQL error details
  * 
  * @apiUse JSONError
- */ 
+ */
 router.post("/", (request, response) => {
 
     if (isProvided(request.body.name) && isProvided(request.body.message)) {
@@ -69,13 +68,13 @@ router.post("/", (request, response) => {
                         message: err.detail
                     })
                 }
-            }) 
-            
+            })
+
     } else {
         response.status(400).send({
             message: "Missing required information"
         })
-    }    
+    }
 })
 // router.post("/", async (request, response) => {
 
@@ -131,11 +130,11 @@ router.post("/", (request, response) => {
  * @apiError (400: SQL Error) {String} message the reported SQL error details
  * 
  * @apiUse JSONError
- */ 
+ */
 router.get("/:name?", (request, response) => {
 
     const theQuery = 'SELECT name, message FROM Demo WHERE name LIKE $1'
-    const values = [isProvided(request.params.name) ? request.params.name : '%' ]
+    const values = [isProvided(request.params.name) ? request.params.name : '%']
 
     pool.query(theQuery, values)
         .then(result => {
@@ -190,7 +189,7 @@ router.get("/:name?", (request, response) => {
  * @apiError (400: SQL Error) {String} message the reported SQL error details
  * 
  * @apiUse JSONError
- */ 
+ */
 router.put("/", (request, response) => {
 
     if (isProvided(request.body.name) && isProvided(request.body.message)) {
@@ -216,12 +215,12 @@ router.put("/", (request, response) => {
                 response.status(400).send({
                     message: err.detail
                 })
-            }) 
+            })
     } else {
         response.status(400).send({
             message: "Missing required information"
         })
-    } 
+    }
 })
 
 /**
@@ -251,7 +250,7 @@ router.put("/", (request, response) => {
  * @apiError (400: SQL Error) {String} message the reported SQL error details
  * 
  * @apiUse JSONError
- */ 
+ */
 router.delete("/:name", (request, response) => {
 
     if (isProvided(request.params.name)) {
@@ -277,12 +276,12 @@ router.delete("/:name", (request, response) => {
                 response.status(400).send({
                     message: err.detail
                 })
-            }) 
+            })
     } else {
         response.status(400).send({
             message: "Missing required information"
         })
-    } 
+    }
 })
 
 

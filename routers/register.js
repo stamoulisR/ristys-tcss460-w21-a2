@@ -1,16 +1,8 @@
-//express is the framework we're going to use to handle requests
 const express = require('express')
-
-//We use this create the SHA256 hash
+const { request } = require('express')
 const crypto = require("crypto")
 
-//Access the connection to Heroku Database
-const pool = require('../utilities/exports').pool
-
-const getHash = require('../utilities/exports').getHash
-
-const isProvided = require('../utilities/exports').helpers.isProvided
-const { request } = require('express')
+const { pool, getHash, isProvided } = require('../utilities')
 
 const router = express.Router()
 
@@ -42,24 +34,24 @@ const router = express.Router()
  * 
  * @apiError (400: Email exists) {String} message "Email exists"
  * 
- */ 
+ */
 router.post('/', (request, response) => {
 
     //Retrieve data from query params
     const first = request.body.first
     const last = request.body.last
-    const username = isProvided(request.body.username) ?  request.body.username : request.body.email
+    const username = isProvided(request.body.username) ? request.body.username : request.body.email
     const email = request.body.email
     const password = request.body.password
     //Verify that the caller supplied all the parameters
     //In js, empty strings or null values evaluate to false
-    if(isProvided(first) && isProvided(last) && isProvided(username) && isProvided(email) && isProvided(password)) {
+    if (isProvided(first) && isProvided(last) && isProvided(username) && isProvided(email) && isProvided(password)) {
         //We're storing salted hashes to make our application more secure
         //If you're interested as to what that is, and why we should use it
         //watch this youtube video: https://www.youtube.com/watch?v=8ZtInClXe1Q
         let salt = crypto.randomBytes(32).toString("hex")
         let salted_hash = getHash(password, salt)
-        
+
         //We're using placeholders ($1, $2, $3) in the SQL query string to avoid SQL Injection
         //If you want to read more: https://stackoverflow.com/a/8265319
         let theQuery = "INSERT INTO MEMBERS(FirstName, LastName, Username, Email, Password, Salt) VALUES ($1, $2, $3, $4, $5, $6) RETURNING Email"
@@ -109,6 +101,5 @@ router.get('/hash_demo', (request, response) => {
         'unsalted_hash': unsalted_hash
     })
 })
-
 
 module.exports = router

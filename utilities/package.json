@@ -1,4 +1,0 @@
-{ 
-    "name" : "util",
-    "main" : "./exports.js" 
-}

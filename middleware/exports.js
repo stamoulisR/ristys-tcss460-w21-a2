@@ -19,5 +19,5 @@ let example = (request, response, next) => {
 }
 
 module.exports = {
-    checkToken, jsonError, example, checkTokenCookies
-  }
+  checkToken, jsonError, example, checkTokenCookies
+}
